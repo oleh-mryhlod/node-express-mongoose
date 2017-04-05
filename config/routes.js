@@ -5,7 +5,7 @@
  */
 
 const home = require('../app/controllers/home');
-
+const books = require('../app/api/books');
 /**
  * Expose
  */
@@ -13,6 +13,12 @@ const home = require('../app/controllers/home');
 module.exports = function (app, passport) {
 
   app.get('/', home.index);
+
+  app.route('/api/books')
+    .get(books.list)
+    .post(books.create);
+
+  app.route('/api/books/:_id').get(books.details);
 
   /**
    * Error handling

@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express');
 var session = require('express-session');
 var compression = require('compression');
@@ -11,27 +6,25 @@ var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var csrf = require('csurf');
+var csrf = require('csurf'); // CSRF Token management middleware
 
 var mongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var winston = require('winston');
 var helpers = require('view-helpers');
-var jade = require('jade');
 var config = require('./');
 var pkg = require('../package.json');
 
 var env = process.env.NODE_ENV || 'development';
 
-/**
- * Expose
- */
 
 module.exports = function (app, passport) {
 
   // Compression middleware (should be placed before express.static)
+  // The middleware will attempt to compress response bodies for all
+  // request that traverse through the middleware
   app.use(compression({
-    threshold: 512
+    threshold: 512 // compress if response is greater than 512 bytes
   }));
 
   // Static files middleware
