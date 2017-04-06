@@ -5,12 +5,15 @@
  */
 
 const home = require('../app/controllers/home');
+const initializeApi = require('../app/api');
 
 /**
  * Expose
  */
 
 module.exports = function (app, passport) {
+
+  initializeApi(app);
 
   app.get('/', home.index);
 
