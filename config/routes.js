@@ -13,7 +13,7 @@ const initializeApi = require('../app/api');
 
 module.exports = function (app, passport) {
 
-  initializeApi(app);
+  initializeApi(app, passport);
 
   app.get('/', home.index);
 

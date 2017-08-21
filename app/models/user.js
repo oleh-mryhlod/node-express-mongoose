@@ -6,7 +6,6 @@
 var mongoose = require('mongoose');
 var userPlugin = require('mongoose-user');
 var Schema = mongoose.Schema;
-
 /**
  * User schema
  */
@@ -51,4 +50,4 @@ UserSchema.static({
  * Register
  */
 
-mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
