@@ -41,12 +41,28 @@ module.exports = function (app, passport) {
 
 
   app.route('/api/user')
+    // .post(function (req, res, next) {
+    //   const userDoc = req.body;
+    //   const user = new User();
+    //
+    //
+    //   user.facebook.id    = 'profile.id';
+    //   user.facebook.token = 'token';
+    //   user.facebook.name  = '21';
+    //   user.facebook.email = '3';
+    //   user.skipValidation = true;
+    //   user.save(handleError(res, function (result) {
+    //   res.status(200).send(result);
+    //   }));
+    // })
+
+
 
     .post(function (req, res, next) {
       const userDoc = req.body;
       const user = new User({
-        name: userDoc.name,
-        email: userDoc.email,
+          name: userDoc.name,
+          email: userDoc.email,
       });
       user.salt = user.makeSalt()
       user.hashed_password = user.encryptPassword(userDoc.password);
@@ -74,7 +90,7 @@ module.exports = function (app, passport) {
 
   app.route('/api/login')
     .post(
-      passport.authenticate('local', {failureRedirect: '/api/login', failureFlash: true}),
+      passport.authenticate('local-login', {failureRedirect: '/api/login', failureFlash: true}),
       function(req, res) {
         res.redirect('/');
       }
@@ -85,4 +101,17 @@ module.exports = function (app, passport) {
         // res.redirect('/')
         // res.redirect('/api/books');
     });
+
+  app.get('/auth/facebook', passport.authenticate('facebook'));
+
+  app.get('/auth/facebook/callback',
+		passport.authenticate('facebook', {
+			successRedirect : '/profile',
+			failureRedirect : '/'
+		}));
+
+  app.get('/logout', function(req, res) {
+  	req.logout();
+  	res.redirect('/');
+  });
 };

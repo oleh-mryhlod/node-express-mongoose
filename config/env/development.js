@@ -6,8 +6,8 @@
 module.exports = {
   db: 'mongodb://localhost/your_project_development',
   facebook: {
-    clientID: 'APP_ID',
-    clientSecret: 'SECRET',
+    clientID: '674568832732533',
+    clientSecret: '5285f671af275df3dcf0dcb588819dcd',
     callbackURL: 'http://localhost:3000/auth/facebook/callback',
     scope: [
       'email',
