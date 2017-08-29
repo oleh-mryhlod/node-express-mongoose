@@ -6,6 +6,7 @@
 
 const mongoose = require('mongoose');
 const local = require('./passport/local');
+const localSignup = require('./passport/local-signup');
 const facebook = require('./passport/facebook');
 
 const User = mongoose.model('User');
@@ -22,5 +23,6 @@ module.exports = function (passport) {
 
   // use these strategies
   passport.use('local-login', local);
+  passport.use('local-signup', localSignup);
   passport.use(facebook);
 };

@@ -1,0 +1,17 @@
+extends layouts/default.jade
+
+block page-header
+  h2 Enter form
+
+block content
+  form(action='/connect/local', method='post')
+    label(for='email') email
+      input(id='email',type='text',value='',placeholder='@',name='email')
+
+    label(for='name') name
+      input(id='name',type='text',value='',placeholder='',name='name')
+
+    label(for='password') password
+      input(id='password',type='password',value='',placeholder='',name='password')
+    p
+      input(type='submit',value='Sign Up')
